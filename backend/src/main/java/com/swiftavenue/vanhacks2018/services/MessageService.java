@@ -1,12 +1,14 @@
 package com.swiftavenue.vanhacks2018.services;
 
 import java.util.List;
+import javax.transaction.Transactional;
 import com.swiftavenue.vanhacks2018.domain.Message;
 import com.swiftavenue.vanhacks2018.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@Transactional
 public class MessageService {
 
   @Autowired

@@ -24,7 +24,7 @@ public class ClientController {
 
     @RequestMapping(value = "/client", method = RequestMethod.POST)
     public ResponseEntity addClient(@RequestBody Client client) {
-        clientService.addClient(client);
+        clientService.upsert(client);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

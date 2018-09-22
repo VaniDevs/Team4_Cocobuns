@@ -19,7 +19,7 @@ public class OrganizationContoller {
 
     @RequestMapping(value = "/organization", method = RequestMethod.POST)
     public ResponseEntity postOrganization(@RequestBody Organization organization) {
-        organizationService.addOrganization(organization);
+        organizationService.upsert(organization);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 

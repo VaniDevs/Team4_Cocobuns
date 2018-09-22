@@ -1,6 +1,7 @@
 package com.swiftavenue.vanhacks2018.services;
 
 import java.util.Optional;
+import javax.transaction.Transactional;
 import com.swiftavenue.vanhacks2018.repositories.OrganizationRepository;
 import com.swiftavenue.vanhacks2018.repositories.PersonRepository;
 import com.swiftavenue.vanhacks2018.repositories.dao.Organization;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@Transactional
 public class OrganizationService {
     @Autowired
     private OrganizationRepository organizationRepository;
@@ -16,7 +18,7 @@ public class OrganizationService {
     @Autowired
     private PersonRepository personRepository;
 
-    public void addOrganization(Organization organization) {
+    public void upsert(Organization organization) {
         organizationRepository.save(organization);
     }
 
