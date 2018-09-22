@@ -9,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -35,9 +34,8 @@ public class Client {
     @Enumerated(EnumType.STRING)
     private Demographic demographic;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "referred_by_id")
-    @JsonBackReference
     private Organization referredBy;
 
     public long getId() {
