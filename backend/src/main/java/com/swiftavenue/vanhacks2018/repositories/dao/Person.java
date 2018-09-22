@@ -23,8 +23,8 @@ public class Person {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "person")
-    private Set<Skill> skills = new HashSet<>();
+    @Column(name = "address")
+    private String address;
 
     public long getId() {
         return id;
@@ -50,12 +50,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public Set<Skill> getSkills() {
-        return skills;
+    public String getAddress() {
+        return address;
     }
 
-    public void setSkills(Set<Skill> skills) {
-        this.skills = skills;
+    public void setAddress(String address) {
+        this.address = address;
     }
-
 }

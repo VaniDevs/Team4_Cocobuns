@@ -1,6 +1,5 @@
 package com.swiftavenue.vanhacks2018.controllers;
 
-import java.util.Collection;
 import java.util.List;
 import com.swiftavenue.vanhacks2018.domain.Message;
 import com.swiftavenue.vanhacks2018.repositories.PersonRepository;
@@ -11,7 +10,6 @@ import com.swiftavenue.vanhacks2018.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,12 +49,6 @@ public class TestController {
   public ResponseEntity<String> getPersons(@RequestBody Person person) {
     personRepo.save(person);
     return new ResponseEntity<>("OK", HttpStatus.ACCEPTED);
-  }
-
-  @RequestMapping(value = "/persons/{lastName}", method = RequestMethod.GET)
-  public ResponseEntity<Person> getPersonByLastName(@PathVariable String lastName) {
-    Person result = personRepo.findByLastName(lastName);
-    return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
   }
 
   @RequestMapping(value = "/skills", method = RequestMethod.GET)
