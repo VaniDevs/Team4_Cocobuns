@@ -1,5 +1,6 @@
 package com.swiftavenue.vanhacks2018.services;
 
+import java.util.List;
 import javax.transaction.Transactional;
 import com.swiftavenue.vanhacks2018.repositories.CaseRepository;
 import com.swiftavenue.vanhacks2018.repositories.ClientRepository;
@@ -36,4 +37,14 @@ public class CaseService {
     public Case getCase(long id) {
         return caseRepository.getOne(id);
     }
+
+    public List<Case> getCases() {
+        return caseRepository.findAll();
+    }
+
+
+    public boolean exists(long caseId) {
+        return caseRepository.existsById(caseId);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.swiftavenue.vanhacks2018.controllers;
 
+import java.util.List;
 import com.swiftavenue.vanhacks2018.repositories.dao.Case;
 import com.swiftavenue.vanhacks2018.services.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,11 @@ public class CaseController {
         Case caze = caseService.getCase(id);
         return new ResponseEntity<>(caze, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/cases", method = RequestMethod.GET)
+    public ResponseEntity<List<Case>> getCases() {
+        List<Case> cases = caseService.getCases();
+        return new ResponseEntity<>(cases, HttpStatus.OK);
+    }
+
 }
