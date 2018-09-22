@@ -13,4 +13,8 @@ public class OrganizationService {
     public void addOrganization(Organization organization) {
         organizationRepository.save(organization);
     }
+
+    public Organization getOrganization(long id) {
+        return organizationRepository.getOne(id);
+    }
 }

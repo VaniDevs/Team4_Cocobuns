@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,5 +21,12 @@ public class OrganizationContoller {
     public ResponseEntity postOrganization(@RequestBody Organization organization) {
         organizationService.addOrganization(organization);
         return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/organization", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Organization> getOrganization(@RequestParam("id") long organizationId) {
+        Organization organization = organizationService.getOrganization(organizationId);
+        return new ResponseEntity<>(organization, HttpStatus.ACCEPTED);
     }
 }
