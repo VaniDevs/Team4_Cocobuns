@@ -5,13 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_id_generator")
-    @SequenceGenerator(name="person_id_generator", sequenceName = "person_id_seq", initialValue = 10, allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "first_name")
@@ -22,6 +23,11 @@ public class Person {
 
     @Column(name = "address")
     private String address;
+
+    @OneToOne
+    @JoinColumn(name = "org_id")
+    @JsonBackReference
+    private Organization organization;
 
     public long getId() {
         return id;
@@ -53,5 +59,13 @@ public class Person {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 }
