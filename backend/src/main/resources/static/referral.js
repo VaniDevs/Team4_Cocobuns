@@ -4,6 +4,7 @@ const Referrals = Vue.component('referral', {
                  <thead>
                   <tr>
                    <th scope="col">#</th>
+                   <th scope="col">Created</th>
                    <th scope="col">Status</th>
                    <th scope="col">First Name</th>
                    <th scope="col">Last Name</th>
@@ -12,6 +13,7 @@ const Referrals = Vue.component('referral', {
                  <tbody>
                     <tr v-for="referral in referrals">
                        <th scope="row">{{ referral.id }}</th>
+                       <td>{{ referral.createDateTime }}</td>
                        <td>{{ referral.caseStatus }}</td>
                        <td>{{ referral.client.firstName }}</td>
                        <td>{{ referral.client.lastName }}</td>
