@@ -9,11 +9,12 @@ const Referrals = Vue.component('referral', {
                    <th scope="col">Last Name</th>
                   </tr>
                  </thead>
-                 <tbody v-for="referral in referrals">
+                 <tbody>
                     <tr v-for="referral in referrals">
                        <th scope="row">{{ referral.id }}</th>
-                       <td>{{ referral.name }}</td>
-                       <td>{{ referral.description }}</td>
+                       <td>{{ referral.caseStatus }}</td>
+                       <td>{{ referral.client.firstName }}</td>
+                       <td>{{ referral.client.lastName }}</td>
                     </tr>
                  </tbody>
                  </table>`,
