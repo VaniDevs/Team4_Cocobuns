@@ -92,6 +92,7 @@
     const routes = [
       { path: '/referrals', component: Referrals },
       { path: '/referral-create', component: ReferralCreate },
+      { path: '/referral-detail/:id', component: ReferralDetail },
       { path: '/agencies', component: Agencies },
       { path: '/agents', component: Agents },
       { path: '/help', component: Help }
@@ -100,7 +101,6 @@
     const router = new VueRouter({
       routes
     })
-
 
     var app = new Vue({
         el: '#contents',

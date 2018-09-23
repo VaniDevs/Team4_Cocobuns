@@ -22,7 +22,7 @@ public class CaseService {
     @Autowired
     private ClientRepository clientRepository;
 
-    public void addCase(Case caze) {
+    public Case addCase(Case caze) {
         if (!personRepository.exists(Example.of(caze.getOpenedBy()))) {
             personRepository.save(caze.getOpenedBy());
         }
@@ -31,7 +31,7 @@ public class CaseService {
             clientRepository.save(caze.getClient());
         }
 
-        caseRepository.save(caze);
+        return caseRepository.save(caze);
     }
 
     public Case getCase(long id) {

@@ -1,21 +1,4 @@
 
-Vue.component('date-picker', {
-  template: '<input/>',
-  props: {
-    'dateFormat': {
-        type: String,
-        default: 'yy-dd-mm'
-    }
-  },
-  created() {
-    $(this.$el).datetimepicker({
-      dateFormat: this.dateFormat
-    });
-  },
-  beforeDestroy() {
-  }
-});
-
 const ReferralCreate = Vue.component('referral-create', {
     props: ['referral'],
     template: `
@@ -26,8 +9,6 @@ const ReferralCreate = Vue.component('referral-create', {
         <div class="form-check" v-for="(option, index) in socialOptions">
               <input class="form-check-input" type="checkbox"
                 value="" v-bind:id="option.value" v-bind:value="option.value" v-model="selectedSocialGroups">
-              <input class="form-check-input" type="checkbox"
-                value="" v-bind:id="option.value" v-bind:value="option.value" v-model="selectedRequestedGears">
               <label class="form-check-label" v-bind:for="option.value">
                 {{ option.label }}
               </label>
@@ -73,8 +54,8 @@ const ReferralCreate = Vue.component('referral-create', {
       <label>Gear Requested</label>
       <div class="form-group">
         <div class="form-check form-check-inline" v-for="(option, index) in gearOptions">
-          <input class="form-check-input" type="checkbox"
-            value="" v-bind:id="option.value" v-bind:value="option.value">
+          <input class="form-check-input" type="checkbox" v-model="selectedRequestedGears"
+            value="" v-bind:id="option.value" v-bind:value="option.label">
           <label class="form-check-label" v-bind:for="option.value">
             {{ option.label }}
           </label>
@@ -138,11 +119,21 @@ const ReferralCreate = Vue.component('referral-create', {
     },
     methods: {
         onSubmit() {
-            this.referralRequest.client.sociographics = this.selectedSocialGroups.join(',');
-            this.referralRequest.client.requestedGears = this.selectedRequestedGears.join(',');
+            this.referralRequest.client.sociographics = this.selectedSocialGroups.join(', ');
             axios.post(`${apiBaseUrl}/case`, this.referralRequest)
               .then((response) => {
-                console.log(response.data);
+
+                router.push('referrals');
+
+                let newCase = response.data;
+                let note = "Referral request did not specify any gears"
+                if (this.selectedRequestedGears.length) {
+                    note = 'The following gears have been requested: ' + this.selectedRequestedGears.join(', ')
+                }
+                axios.post(`${apiBaseUrl}/case/${newCase.id}/note`, {
+                    note
+                });
+
               });
         }
     }
