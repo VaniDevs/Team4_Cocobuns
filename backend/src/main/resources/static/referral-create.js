@@ -4,23 +4,23 @@ const ReferralCreate = Vue.component('referral-create', {
     template: `
     <form v-on:submit.prevent="onSubmit">
 
-      <div class="form-group">
-        <label>Social-graphics</label>
-        <div class="form-check" v-for="(option, index) in socialOptions">
-              <input class="form-check-input" type="checkbox"
-                value="" v-bind:id="option.value" v-bind:value="option.value" v-model="selectedSocialGroups">
-              <label class="form-check-label" v-bind:for="option.value">
-                {{ option.label }}
-              </label>
-        </div>
-      </div>
-
       <div class="form-row">
         <div class="form-group col">
             <input type="text" class="form-control" placeholder="First name" v-model="referralRequest.client.firstName">
         </div>
         <div class="form-group col">
             <input type="text" class="form-control" placeholder="Last name" v-model="referralRequest.client.lastName">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Social Group</label>
+        <div class="form-check" v-for="(option, index) in socialOptions">
+              <input class="form-check-input" type="checkbox"
+                value="" v-bind:id="option.value" v-bind:value="option.value" v-model="selectedSocialGroups">
+              <label class="form-check-label" v-bind:for="option.value">
+                {{ option.label }}
+              </label>
         </div>
       </div>
 
@@ -34,16 +34,11 @@ const ReferralCreate = Vue.component('referral-create', {
         <input type="email" class="form-control" id="inputEmail" placeholder="Email" v-model="referralRequest.client.email">
       </div>
 
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputHomePhone">Home Phone</label>
-          <input type="text" class="form-control" id="inputHomePhone" placeholder="" v-model="referralRequest.client.phone">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="inputMobilePhone">Mobile Phone</label>
-          <input type="text" class="form-control" id="inputMobilePhone" placeholder="">
-        </div>
+      <div class="form-group">
+        <label for="inputHomePhone">Home Phone</label>
+        <input type="text" class="form-control" id="inputHomePhone" placeholder="" v-model="referralRequest.client.phoneNumber">
       </div>
+
 
       <div class="form-group">
         <label for="inputBabyDOB">Baby\'s Date of Birth</label>
@@ -124,6 +119,9 @@ const ReferralCreate = Vue.component('referral-create', {
       }
     },
     created() {
+      $('#introMessage').text("Referral Form - Agency");
+
+
       let size = 7;
       let newArr = [];
       for (var i=0; i < this.gearOptions.length; i+=size) {

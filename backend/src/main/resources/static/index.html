@@ -27,7 +27,7 @@
 <div id="contents">
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">BGA</a>
+        <a class="navbar-brand" href="#"><image src="image/logo_tiny2.png" /></a>
         <button class="navbar-toggler" type="button"
                 data-toggle="collapse" data-target="#myNavBars">
             <span class="navbar-toggler-icon"></span>
@@ -52,11 +52,14 @@
 
         <div class="jumbotron">
             <div class="container">
-                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                <p id="introMessage" class="lead">
+                    BabyGoRound is an organization that assists parents with urgent financial needs, by supplying
+                    them with gently used baby gear and clothing.
+                </p>
             </div>
         </div>
 
-        <div class="container">
+        <div class="container main-body">
             <router-view></router-view>
             <hr>
         </div>
@@ -92,6 +95,7 @@
 <script type="text/babel">
 
     const routes = [
+      { path: '/', redirect: 'referrals' },
       { path: '/referrals', component: Referrals },
       { path: '/referral-create', component: ReferralCreate },
       { path: '/referral-detail/:id', component: ReferralDetail },

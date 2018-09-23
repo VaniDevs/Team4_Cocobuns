@@ -16,7 +16,7 @@ Vue.component('case-status', {
 });
 
 const Referrals = Vue.component('referral', {
-    template: `<table class="table referral-table">
+    template: `<table class="table referral-table table-striped table-hover">
                  <thead>
                   <tr>
                    <th scope="col">#</th>
@@ -49,6 +49,7 @@ const Referrals = Vue.component('referral', {
       }
     },
     created() {
+      $('#introMessage').text("Most Recent Referrals");
       this.fetchData();
     },
     watch: {

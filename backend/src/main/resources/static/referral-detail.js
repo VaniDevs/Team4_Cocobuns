@@ -22,15 +22,9 @@ const ReferralDetail = Vue.component('referral-detail', {
         <input type="email" class="form-control" id="inputEmail" placeholder="Email" v-model="referral.client.email">
       </div>
 
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputHomePhone">Home Phone</label>
-          <input type="text" class="form-control" id="inputHomePhone" placeholder="" v-model="referral.client.phoneNumber">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="inputMobilePhone">Mobile Phone</label>
-          <input type="text" class="form-control" id="inputMobilePhone" placeholder="">
-        </div>
+      <div class="form-group">
+        <label for="inputHomePhone">Home Phone</label>
+        <input type="text" class="form-control" id="inputHomePhone" placeholder="" v-model="referral.client.phoneNumber">
       </div>
 
       <div class="form-group">
@@ -41,7 +35,7 @@ const ReferralDetail = Vue.component('referral-detail', {
 
       <button class="btn btn-info" :disabled="disableApproveBtn" v-on:click="approve()">{{ referral.caseStatus | approveBtnLabel }}</button>
 
-      <button class="btn btn-info" :disabled="disableScheduleBtn" data-toggle="modal" data-target="#notifyModal">Confirm Appointment</button>
+      <button class="btn btn-info" :disabled="disableScheduleBtn" data-toggle="modal" data-target="#notifyModal">{{ referral.caseStatus | confirmAppointmentBtnLabel }}</button>
 
       <button type="submit" class="btn btn-primary float-right">Update</button>
 
@@ -112,6 +106,7 @@ const ReferralDetail = Vue.component('referral-detail', {
       }
     },
     created() {
+        $('#introMessage').text("Details");
       this.fetchData();
       this.fetchNotes();
     },
@@ -123,12 +118,19 @@ const ReferralDetail = Vue.component('referral-detail', {
             return this.referral.caseStatus != 'APPROVED';
         }
     },
-    filtered: {
+    filters: {
         approveBtnLabel(status) {
             if (status == 'APPROVED' || status == 'SCHEDULED') {
               return 'APPROVED';
             } else {
               return 'APPROVE';
+            }
+        },
+        confirmAppointmentBtnLabel(status) {
+            if (status == 'SCHEDULED') {
+              return 'APPOINTMENT CONFIRMED';
+            } else {
+              return 'CONFIRM APPOINTMENT';
             }
         }
     },

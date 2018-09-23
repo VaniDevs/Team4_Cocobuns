@@ -1,4 +1,8 @@
 
+.lead {
+    color: #444;
+}
+
 div.jumbotron {
     padding-bottom: 0.1rem;
     margin-bottom: 1rem;
@@ -9,13 +13,24 @@ div.jumbotron {
   cursor: pointer;
 }
 
-.referral-table tbody > tr:hover {
-  color: #0056b3;
-  text-decoration: none;
-  background-color: #e9ecef;
-  border-color: #dee2e6;
+.jumbotron {
+    background-image: url("image/flower.jpeg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
 
 textarea#appointment-message-text {
   height: 150px;
+}
+
+.team-members {
+    font-size: 2rem;
+    text-align: center;
 }
