@@ -32,8 +32,9 @@ public class Client {
     @Column(name = "email")
     private String email;
 
-    // @ElementCollection
     private String sociographics;
+
+    private String requestedGears;
 
     public long getId() {
         return id;
@@ -97,5 +98,13 @@ public class Client {
 
     public void setBabyDateOfBirth(String babyDateOfBirth) {
         this.babyDateOfBirth = babyDateOfBirth;
+    }
+
+    public String getRequestedGears() {
+        return requestedGears;
+    }
+
+    public void setRequestedGears(String requestedGears) {
+        this.requestedGears = requestedGears;
     }
 }

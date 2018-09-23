@@ -87,20 +87,13 @@ const ReferralCreate = Vue.component('referral-create', {
         selectedSocialGroups: [],
         selectedRequestedGears: [],
         referralRequest: {
-          caseStatus: 'new',
+          caseStatus: 'NEW',
           client: {
             firstName: '', lastName: '',
-            dateOfBirth: '', babyDateOfBirth: '',
-            referredBy: {
-                id: currentOrgId
-            },
-            socialgraphics: ''
+            dateOfBirth: '', babyDateOfBirth: ''
           },
           openedBy: {
-            id: currentAgentId,
-            organization : {
-                id: currentOrgId
-            }
+            id: currentAgentId
           }
         },
         socialOptions: [
