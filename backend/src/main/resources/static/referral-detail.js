@@ -179,7 +179,7 @@ const ReferralDetail = Vue.component('referral-detail', {
             let clientNumber = this.referral.client.phoneNumber;
             axios.post(`${apiBaseUrl}/case/${this.$route.params.id}/schedule?date=${appointmentDate}&phoneNo=${clientNumber}`,
                 this.confirmationMessage, {headers: {"Content-Type": "text/plain"}})
-             .then((response2 => {
+             .then((response => {
                 this.referral = response.data;
                 $("#notifyModal").modal('hide');
             }));
