@@ -47,6 +47,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile 'io.springfox:springfox-swagger2:2.9.2'
 	compile 'io.springfox:springfox-swagger-ui:2.9.2'
+	compile 'com.twilio.sdk:twilio:7.25.0'
 	
 	// compile('org.springframework.cloud:spring-cloud-starter-aws')
 	// compile('org.springframework.cloud:spring-cloud-starter-aws-jdbc')

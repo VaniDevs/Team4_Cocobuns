@@ -38,6 +38,8 @@ public class Case {
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
 
+    private String appointmentDateTime;
+
     public Client getClient() {
         return client;
     }
@@ -84,5 +86,13 @@ public class Case {
 
     public void setUpdateDateTime(LocalDateTime updateDateTime) {
         this.updateDateTime = updateDateTime;
+    }
+
+    public String getAppointmentDateTime() {
+        return appointmentDateTime;
+    }
+
+    public void setAppointmentDateTime(String appointmentDateTime) {
+        this.appointmentDateTime = appointmentDateTime;
     }
 }
