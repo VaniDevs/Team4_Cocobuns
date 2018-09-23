@@ -50,19 +50,24 @@ const ReferralCreate = Vue.component('referral-create', {
         <input type="text" class="form-control" id="inputBabyDOB" placeholder="yy/mm/dd" v-model="referralRequest.client.babyDateOfBirth">
       </div>
 
-
       <label>Gear Requested</label>
-      <div class="form-group">
-        <div class="form-check form-check-inline" v-for="(option, index) in gearOptions">
-          <input class="form-check-input" type="checkbox" v-model="selectedRequestedGears"
-            value="" v-bind:id="option.value" v-bind:value="option.label">
-          <label class="form-check-label" v-bind:for="option.value">
-            {{ option.label }}
-          </label>
-        </div>
+      <div class="row">
+          <div class="col-sm-3 py-2" v-for='(g, gIndex) in groupedGearOptions'>
+              <form class="form-inline" v-for='(item, index) in g'>
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" v-model="selectedRequestedGears"
+                        v-bind:id="item.value" v-bind:value="item.label">
+                      <label class="form-check-label" v-bind:for="item.value">
+                       {{ item.label }}
+                      </label>
+                  </div>
+              </form>
+          </div>
       </div>
 
-      <button type="submit" class="btn btn-primary">Submit Referral</button>
+      <div class="clearfix">
+       <button type="submit" class="btn btn-primary float-right">Submit Referral</button>
+      </div>
     </form>
     `,
     data() {
@@ -114,8 +119,17 @@ const ReferralCreate = Vue.component('referral-create', {
             { label: "monitor", value: "MONITOR" },
             { label: "safety gear", value: "SAFETY_GEAR" },
             { label: "breast pump", value: "BREAST_PUMP" }
-        ]
+        ],
+        groupedGearOptions: []
       }
+    },
+    created() {
+      let size = 7;
+      let newArr = [];
+      for (var i=0; i < this.gearOptions.length; i+=size) {
+        newArr.push(this.gearOptions.slice(i, i+size));
+      }
+      this.groupedGearOptions = newArr;
     },
     methods: {
         onSubmit() {
@@ -135,6 +149,6 @@ const ReferralCreate = Vue.component('referral-create', {
                 });
 
               });
-        }
+        },
     }
 });

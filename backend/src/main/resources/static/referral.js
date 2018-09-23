@@ -1,4 +1,20 @@
 
+Vue.component('case-status', {
+  props: ['status'],
+  template: `
+    <span class="badge" v-bind:class="computeBadgeColor">{{status}}</span>
+  `,
+  computed: {
+      computeBadgeColor() {
+        return {
+            "badge-info": this.status == 'NEW',
+            "badge-danger": this.status == 'APPROVED',
+            "badge-warning": this.status == 'SCHEDULED'
+        }
+      }
+    }
+});
+
 const Referrals = Vue.component('referral', {
     template: `<table class="table referral-table">
                  <thead>
@@ -17,7 +33,7 @@ const Referrals = Vue.component('referral', {
                     <tr v-for="referral in referrals" v-on:click="openDetail(referral.id)">
                        <th scope="row">{{ referral.id }}</th>
                        <td>{{ referral.createDateTime | moment }}</th>
-                       <td>{{ referral.caseStatus }}</td>
+                       <td><case-status v-bind:status="referral.caseStatus"></case-status></td>
                        <td>{{ referral.client.firstName }}</td>
                        <td>{{ referral.client.lastName }}</td>
                        <td>{{ referral.client.email }}</td>
@@ -39,9 +55,10 @@ const Referrals = Vue.component('referral', {
         '$route': 'fetchData'
     },
     filters: {
-      moment: function (date) {
-        return moment(date).format('MMMM Do YYYY, h:mm a');
+      moment(date) {
+        return moment(date).format('MMM Do YY, h:mm a');
       }
+
     },
     methods: {
         fetchData() {

@@ -38,9 +38,12 @@ const ReferralDetail = Vue.component('referral-detail', {
         <input type="text" class="form-control" id="inputBabyDOB" placeholder="yy/mm/dd" v-model="referral.client.babyDateOfBirth">
       </div>
 
-      <button type="submit" class="btn btn-primary">Update</button>
 
-      <button class="btn btn-info" data-toggle="modal" data-target="#notifyModal">Confirm Appointment</button>
+      <button class="btn btn-info" :disabled="disableApproveBtn" v-on:click="approve()">{{ referral.caseStatus | approveBtnLabel }}</button>
+
+      <button class="btn btn-info" :disabled="disableScheduleBtn" data-toggle="modal" data-target="#notifyModal">Confirm Appointment</button>
+
+      <button type="submit" class="btn btn-primary float-right">Update</button>
 
       <hr/>
 
@@ -112,6 +115,23 @@ const ReferralDetail = Vue.component('referral-detail', {
       this.fetchData();
       this.fetchNotes();
     },
+    computed: {
+        disableApproveBtn() {
+            return this.referral.caseStatus == 'APPROVED' || this.referral.caseStatus == 'SCHEDULED';
+        },
+        disableScheduleBtn() {
+            return this.referral.caseStatus != 'APPROVED';
+        }
+    },
+    filtered: {
+        approveBtnLabel(status) {
+            if (status == 'APPROVED' || status == 'SCHEDULED') {
+              return 'APPROVED';
+            } else {
+              return 'APPROVE';
+            }
+        }
+    },
     watch: {
         '$route': 'fetchData'
     },
@@ -145,17 +165,22 @@ const ReferralDetail = Vue.component('referral-detail', {
                 this.newNoteMessage = null;
               });
         },
-        sendConfirmationMessage() {
+        approve() {
             axios.post(`${apiBaseUrl}/case/${this.$route.params.id}/approve`)
               .then((response) => {
-                let appointmentDate = "2018-12-14";
-                let clientNumber = this.referral.client.phoneNumber;
-                axios.post(`${apiBaseUrl}/case/${this.$route.params.id}/schedule?date=${appointmentDate}&phoneNo=${clientNumber}`,
-                    this.confirmationMessage, {headers: {"Content-Type": "text/plain"}})
-                 .then((response2 => {
-                    $("#notifyModal").modal('hide');
-                }))
+                this.referral = response.data;
               });
+        },
+        sendConfirmationMessage() {
+            //FIXME: hard-coded date
+            let appointmentDate = "2018-12-14";
+            let clientNumber = this.referral.client.phoneNumber;
+            axios.post(`${apiBaseUrl}/case/${this.$route.params.id}/schedule?date=${appointmentDate}&phoneNo=${clientNumber}`,
+                this.confirmationMessage, {headers: {"Content-Type": "text/plain"}})
+             .then((response2 => {
+                this.referral = response.data;
+                $("#notifyModal").modal('hide');
+            }));
         }
     }
 

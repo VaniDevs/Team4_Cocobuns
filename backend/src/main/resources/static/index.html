@@ -29,17 +29,17 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="#">BGA</a>
         <button class="navbar-toggler" type="button"
-                data-toggle="collapse">
+                data-toggle="collapse" data-target="#myNavBars">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <div class="collapse navbar-collapse" id="myNavBars">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <router-link class="nav-link" data-toggle="dropdown" to="/referral-create">Submit New Referral</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" data-toggle="dropdown" to="/referrals">Existing Referrals</router-link>
+                    <router-link class="nav-link" data-toggle="dropdown" to="/referrals">Referrals Database</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link class="nav-link" data-toggle="dropdown" to="/help">Team</router-link>
@@ -59,14 +59,14 @@
         <div class="container">
             <router-view></router-view>
             <hr>
-        </div> <!-- /container -->
+        </div>
 
     </main>
 
 </div>
 
 <footer class="container">
-    <p>&copy; Company 2017-2018</p>
+    <p>Team CocoBuns - Vanhacks 2018</p>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -65,37 +65,70 @@ public class CaseController {
         return new ResponseEntity<>(caze, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/case/{id}/approve", method = RequestMethod.POST)
-    public ResponseEntity approveCase(@PathVariable("id") long id) {
-        if (!caseService.exists(id)) {
-            return new ResponseEntity<>("Case not found", HttpStatus.NOT_FOUND);
-        }
-
+    @PostMapping(value = "/case/{id}/approve")
+    public Case approveCase(@PathVariable("id") long id) {
         caseService.approveCase(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        Case updated = caseService.getCase(id);
+        return updated;
     }
 
-    @RequestMapping(value = "/case/{id}/schedule", method = RequestMethod.POST)
-    public ResponseEntity scheduleCase(
+    @PostMapping(value = "/case/{id}/schedule")
+    public Case scheduleCase(
             @PathVariable("id") long id,
             @RequestParam("date") String appointmentTime,
             @RequestParam("phoneNo") String phoneNo,
             @RequestBody String message) {
-        if (!caseService.exists(id)) {
-            return new ResponseEntity<>("Case not found", HttpStatus.NOT_FOUND);
-        }
-
         caseService.scheduleCase(id, appointmentTime);
         smsSender.sendSms(message, phoneNo);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        Case updated = caseService.getCase(id);
+        return updated;
     }
 
 
     @RequestMapping(value = "/cases", method = RequestMethod.GET)
     public ResponseEntity<List<Case>> getCases() {
         List<Case> cases = caseService.getCases();
+
+        cases.sort((o1, o2) -> {
+
+            int o1Value = computerOrderStatus(o1.getCaseStatus());
+            int o2Value = computerOrderStatus(o2.getCaseStatus());
+
+            if (o1Value == o2Value) {
+                return 0;
+            } else if (o1Value < o2Value) {
+                return -1;
+            } else {
+                return 1;
+            }
+
+        });
+
         return new ResponseEntity<>(cases, HttpStatus.OK);
+    }
+
+    protected static int computerOrderStatus(String status) {
+
+        if (status == null) {
+            return 100;
+        }
+
+        if (status.equals("NEW")) {
+            return 20;
+        }
+
+        if (status.equals("APPROVED")) {
+            return 10;
+        }
+
+        if (status.equals("SCHEDULED")) {
+            return 5;
+        }
+
+        return -50;
+
     }
 
 }
