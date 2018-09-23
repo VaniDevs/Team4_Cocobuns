@@ -3,6 +3,10 @@
     color: #444;
 }
 
+.card-header {
+    font-weight: 800;
+}
+
 div.jumbotron {
     padding-bottom: 0.1rem;
     margin-bottom: 1rem;
@@ -27,7 +31,7 @@ div.jumbotron {
 }
 
 textarea#appointment-message-text {
-  height: 150px;
+    height: 150px;
 }
 
 .team-members {
