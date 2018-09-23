@@ -1,15 +1,10 @@
 package com.swiftavenue.vanhacks2018.repositories.dao;
 
-import java.util.Date;
-import java.util.Set;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -40,10 +35,6 @@ public class Client {
     // @ElementCollection
     private String sociographics;
 
-    @ManyToOne
-    @JoinColumn(name = "referred_by_id")
-    private Organization referredBy;
-
     public long getId() {
         return id;
     }
@@ -66,14 +57,6 @@ public class Client {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public Organization getReferredBy() {
-        return referredBy;
-    }
-
-    public void setReferredBy(Organization referredBy) {
-        this.referredBy = referredBy;
     }
 
     public String getPhoneNumber() {
