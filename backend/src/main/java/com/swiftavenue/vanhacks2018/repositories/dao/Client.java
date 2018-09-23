@@ -26,13 +26,19 @@ public class Client {
     private String lastName;
 
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     @Column(name = "baby_date_of_birth")
-    private Date babyDateOfBirth;
+    private String babyDateOfBirth;
 
-    @ElementCollection
-    private Set<Sociographic> sociographics;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "email")
+    private String email;
+
+    // @ElementCollection
+    private String sociographics;
 
     @ManyToOne
     @JoinColumn(name = "referred_by_id")
@@ -58,30 +64,6 @@ public class Client {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public Date getBabyDateOfBirth() {
-        return babyDateOfBirth;
-    }
-
-    public void setBabyDateOfBirth(Date babyDateOfBirth) {
-        this.babyDateOfBirth = babyDateOfBirth;
-    }
-
-    public Set<Sociographic> getSociographics() {
-        return sociographics;
-    }
-
-    public void setSociographics(Set<Sociographic> sociographics) {
-        this.sociographics = sociographics;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -92,5 +74,45 @@ public class Client {
 
     public void setReferredBy(Organization referredBy) {
         this.referredBy = referredBy;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSociographics() {
+        return sociographics;
+    }
+
+    public void setSociographics(String sociographics) {
+        this.sociographics = sociographics;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getBabyDateOfBirth() {
+        return babyDateOfBirth;
+    }
+
+    public void setBabyDateOfBirth(String babyDateOfBirth) {
+        this.babyDateOfBirth = babyDateOfBirth;
     }
 }

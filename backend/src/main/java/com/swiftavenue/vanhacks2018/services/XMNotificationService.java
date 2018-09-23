@@ -16,7 +16,9 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.stereotype.Component;
 
+@Component
 public class XMNotificationService {
     // TODO-Dwi: externalize later
     private static final String XMATTERS_URI = "https://cocobuns.xmatters.com/reapi/2015-04-01/forms/c4ef8900-7997-40a8-948d-4aefe90d8aab/triggers";

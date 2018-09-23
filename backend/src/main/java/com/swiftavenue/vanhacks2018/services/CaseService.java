@@ -22,7 +22,7 @@ public class CaseService {
     @Autowired
     private ClientRepository clientRepository;
 
-    public void upsert(Case caze) {
+    public void addCase(Case caze) {
         if (!personRepository.exists(Example.of(caze.getOpenedBy()))) {
             personRepository.save(caze.getOpenedBy());
         }

@@ -20,8 +20,8 @@ public class Case {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Enumerated(EnumType.STRING)
-    private CaseStatus caseStatus;
+    // @Enumerated(EnumType.STRING)
+    private String caseStatus;
 
     @OneToOne
     @JoinColumn(name = "client_id")
@@ -30,14 +30,6 @@ public class Case {
     @ManyToOne
     @JoinColumn(name = "opened_by_id")
     private Person openedBy;
-
-    public CaseStatus getCaseStatus() {
-        return caseStatus;
-    }
-
-    public void setCaseStatus(CaseStatus caseStatus) {
-        this.caseStatus = caseStatus;
-    }
 
     public Client getClient() {
         return client;
@@ -61,5 +53,13 @@ public class Case {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getCaseStatus() {
+        return caseStatus;
+    }
+
+    public void setCaseStatus(String caseStatus) {
+        this.caseStatus = caseStatus;
     }
 }
