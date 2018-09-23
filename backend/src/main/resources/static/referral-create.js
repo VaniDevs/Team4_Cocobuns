@@ -2,7 +2,6 @@
 const ReferralCreate = Vue.component('referral-create', {
     props: ['referral'],
     template: `
-    <transition-page>
     <form v-on:submit.prevent="onSubmit">
 
       <div class="form-row">
@@ -62,12 +61,13 @@ const ReferralCreate = Vue.component('referral-create', {
       </div>
 
       <div class="clearfix">
-       <button type="submit" class="btn btn-primary float-right">Submit Referral</button>
+       <button type="submit" class="btn btn-primary float-right " v-bind:disabled="isLoading"><i v-show="isLoading" class="fa fa-spinner fa-spin"></i> Submit Referral</button>
       </div>
-    </form></transition-page>
+      </form>
     `,
     data() {
       return {
+        isLoading: false,
         selectedSocialGroups: [],
         selectedRequestedGears: [],
         referralRequest: {
@@ -133,9 +133,11 @@ const ReferralCreate = Vue.component('referral-create', {
     methods: {
         onSubmit() {
             this.referralRequest.client.sociographics = this.selectedSocialGroups.join(', ');
+            this.isLoading = true;
             axios.post(`${apiBaseUrl}/case`, this.referralRequest)
               .then((response) => {
 
+                this.isLoading = false;
                 router.push('referrals');
 
                 let newCase = response.data;

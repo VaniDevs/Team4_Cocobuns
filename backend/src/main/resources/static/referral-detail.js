@@ -37,7 +37,7 @@ const ReferralDetail = Vue.component('referral-detail', {
 
       <button class="btn btn-info" :disabled="disableScheduleBtn" data-toggle="modal" data-target="#notifyModal">{{ referral.caseStatus | confirmAppointmentBtnLabel }}</button>
 
-      <button type="submit" class="btn btn-primary float-right">Update</button>
+      <button type="submit" class="btn btn-primary float-right" v-bind:disabled="isLoading"><i v-show="isLoading" class="fa fa-spinner fa-spin"></i> Update</button>
 
       <hr/>
 
@@ -84,7 +84,7 @@ const ReferralDetail = Vue.component('referral-detail', {
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" v-on:click="sendConfirmationMessage()">Send message</button>
+                <button type="button" class="btn btn-primary" v-on:click="sendConfirmationMessage()" v-bind:disabled="isLoading"><i v-show="isLoading" class="fa fa-spinner fa-spin"></i> Send message</button>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@ const ReferralDetail = Vue.component('referral-detail', {
     `,
     data() {
       return {
-        loading: false,
+        isLoading: false,
         referral: {
             client: {}
         },
@@ -152,8 +152,10 @@ const ReferralDetail = Vue.component('referral-detail', {
             });
         },
         onSubmit() {
+            this.isLoading = true;
             axios.post(`${apiBaseUrl}/case`, this.referral)
               .then((response) => {
+                this.isLoading = false;
               });
         },
         addNote() {
@@ -172,12 +174,14 @@ const ReferralDetail = Vue.component('referral-detail', {
               });
         },
         sendConfirmationMessage() {
+            this.isLoading = true;
             //FIXME: hard-coded date
             let appointmentDate = "2018-12-14";
             let clientNumber = this.referral.client.phoneNumber;
             axios.post(`${apiBaseUrl}/case/${this.$route.params.id}/schedule?date=${appointmentDate}&phoneNo=${clientNumber}`,
                 this.confirmationMessage, {headers: {"Content-Type": "text/plain"}})
              .then((response => {
+                this.isLoading = false;
                 this.referral = response.data;
                 $("#notifyModal").modal('hide');
             }));
