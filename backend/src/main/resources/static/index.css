@@ -54,6 +54,8 @@ textarea#appointment-message-text {
 .team-members {
     font-size: 2rem;
     text-align: center;
+    margin-top: 7rem;
+    margin-bottom: 5rem;
 }
 
 .fade-enter-active {
