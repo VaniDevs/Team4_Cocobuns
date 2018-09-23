@@ -79,14 +79,13 @@ public class CaseController {
     public ResponseEntity scheduleCase(
             @PathVariable("id") long id,
             @RequestParam("date") String appointmentTime,
-            @RequestParam("phoneNo") String phoneNo) {
+            @RequestParam("phoneNo") String phoneNo,
+            @RequestBody String message) {
         if (!caseService.exists(id)) {
             return new ResponseEntity<>("Case not found", HttpStatus.NOT_FOUND);
         }
 
         caseService.scheduleCase(id, appointmentTime);
-
-        String message = "Your appointment has been confirmed at " + appointmentTime;
         smsSender.sendSms(message, phoneNo);
 
         return new ResponseEntity<>(HttpStatus.OK);

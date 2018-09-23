@@ -1,9 +1,10 @@
 
 const Referrals = Vue.component('referral', {
-    template: `<table class="table">
+    template: `<table class="table referral-table">
                  <thead>
                   <tr>
-                   <th scope="col">Created</th>
+                   <th scope="col">#</th>
+                   <th scope="col">Date</th>
                    <th scope="col">Status</th>
                    <th scope="col">First Name</th>
                    <th scope="col">Last Name</th>
@@ -14,7 +15,8 @@ const Referrals = Vue.component('referral', {
                  </thead>
                  <tbody>
                     <tr v-for="referral in referrals" v-on:click="openDetail(referral.id)">
-                       <th scope="row">{{ referral.createDateTime }}</th>
+                       <th scope="row">{{ referral.id }}</th>
+                       <td>{{ referral.createDateTime | moment }}</th>
                        <td>{{ referral.caseStatus }}</td>
                        <td>{{ referral.client.firstName }}</td>
                        <td>{{ referral.client.lastName }}</td>
@@ -36,14 +38,16 @@ const Referrals = Vue.component('referral', {
     watch: {
         '$route': 'fetchData'
     },
+    filters: {
+      moment: function (date) {
+        return moment(date).format('MMMM Do YYYY, h:mm a');
+      }
+    },
     methods: {
         fetchData() {
             axios.get(`${apiBaseUrl}/cases`)
               .then((response) => {
-
-                console.log(response.data);
                 this.referrals = response.data;
-
               });
         },
         openDetail(id) {

@@ -1,18 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <meta content="initial-scale=1, shrink-to-fit=no, width=device-width" name="viewport">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <title>Team Cocobun</title>
 
+    <!--
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+          -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Roboto+Mono:300,400,700|Roboto+Slab:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <style>
         @import url("/index.css");
+        @import url("/css/material.min.css");
     </style>
 </head>
 <body>
@@ -20,7 +27,7 @@
 <div id="contents">
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">BGA</a>
         <button class="navbar-toggler" type="button"
                 data-toggle="collapse">
             <span class="navbar-toggler-icon"></span>
@@ -28,29 +35,22 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"id="dropdown01" data-toggle="dropdown">Referral</a>
-                    <div class="dropdown-menu">
-                        <router-link class="dropdown-item" to="/referral-create">Submit New Referrer</router-link>
-                        <router-link class="dropdown-item" to="/referrals">Referrer Cases</router-link>
-                        <router-link class="dropdown-item" to="/agencies">Agency</router-link>
-                        <router-link class="dropdown-item" to="/agents">Referrer Agent</router-link>
-                    </div>
+                <li class="nav-item">
+                    <router-link class="nav-link" data-toggle="dropdown" to="/referral-create">Submit New Referral</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" data-toggle="dropdown" to="/help">Help</router-link>
+                    <router-link class="nav-link" data-toggle="dropdown" to="/referrals">Existing Referrals</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" data-toggle="dropdown" to="/help">Team</router-link>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </nav>
 
     <main role="main">
 
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron">
             <div class="container">
                 <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
             </div>
@@ -72,7 +72,9 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script src="js/material.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
 <!-- development version, includes helpful console warnings -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

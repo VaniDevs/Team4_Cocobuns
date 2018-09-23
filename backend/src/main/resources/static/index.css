@@ -1,4 +1,21 @@
 
-.jumbotron {
+div.jumbotron {
     padding-bottom: 0.1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.referral-table tbody > tr {
+  cursor: pointer;
+}
+
+.referral-table tbody > tr:hover {
+  color: #0056b3;
+  text-decoration: none;
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+}
+
+textarea#appointment-message-text {
+  height: 150px;
 }

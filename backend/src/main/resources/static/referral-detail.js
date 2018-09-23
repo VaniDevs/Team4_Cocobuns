@@ -25,7 +25,7 @@ const ReferralDetail = Vue.component('referral-detail', {
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputHomePhone">Home Phone</label>
-          <input type="text" class="form-control" id="inputHomePhone" placeholder="" v-model="referral.client.phone">
+          <input type="text" class="form-control" id="inputHomePhone" placeholder="" v-model="referral.client.phoneNumber">
         </div>
         <div class="form-group col-md-6">
           <label for="inputMobilePhone">Mobile Phone</label>
@@ -69,13 +69,19 @@ const ReferralDetail = Vue.component('referral-detail', {
               </div>
               <div class="modal-body">
                 <form>
-                  <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Recipient:</label>
-                    <input type="text" class="form-control" id="recipient-name" :value="referral.client.phone">
+
+                  <label>Recipient:</label>
+                  <div class="form-row">
+                    <div class="form-group col">
+                        <input type="text" class="form-control" readonly id="recipient-phone" :value="referral.client.phoneNumber">
+                    </div>
+                    <div class="form-group col">
+                        <input type="text" class="form-control" readonly  id="recipient-email" :value="referral.client.email">
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="message-text" class="col-form-label">Message:</label>
-                    <textarea class="form-control" id="message-text" row="10">{{ confirmationMessage }}</textarea>
+                    <textarea class="form-control" id="appointment-message-text" v-model="confirmationMessage"></textarea>
                   </div>
                 </form>
               </div>
@@ -99,7 +105,7 @@ const ReferralDetail = Vue.component('referral-detail', {
         },
         notes: [],
         newNoteMessage: '',
-        confirmationMessage: 'Hi your request to Babygoround has been accepted, please contact the closest branch at your convenience'
+        confirmationMessage: ''
       }
     },
     created() {
@@ -114,6 +120,9 @@ const ReferralDetail = Vue.component('referral-detail', {
             axios.get(`${apiBaseUrl}/case/${this.$route.params.id}`)
               .then((response) => {
                 this.referral = response.data;
+                this.confirmationMessage = `Hi ${this.referral.client.firstName} ${this.referral.client.lastName},
+  Your request has been accepted by BabyGoRound representative.
+  Please contact us at 604-888-9999, 9:30 AM - 2:30 PM Pacific Standard Time, Tuesday and Thursday.`
               });
         },
         fetchNotes() {
@@ -137,9 +146,16 @@ const ReferralDetail = Vue.component('referral-detail', {
               });
         },
         sendConfirmationMessage() {
-            //TODO ajax call to notify twilio/xmatters
-            //this.newNoteMessage
-            $("#notifyModal").modal('hide');
+            axios.post(`${apiBaseUrl}/case/${this.$route.params.id}/approve`)
+              .then((response) => {
+                let appointmentDate = "2018-12-14";
+                let clientNumber = this.referral.client.phoneNumber;
+                axios.post(`${apiBaseUrl}/case/${this.$route.params.id}/schedule?date=${appointmentDate}&phoneNo=${clientNumber}`,
+                    this.confirmationMessage, {headers: {"Content-Type": "text/plain"}})
+                 .then((response2 => {
+                    $("#notifyModal").modal('hide');
+                }))
+              });
         }
     }
 

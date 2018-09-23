@@ -1,5 +1,9 @@
 
 const Help = Vue.component('help', {
-    props: ['help'],
-    template: `<div>Help</div>`
+    template: `<div>
+
+Team description goes here
+
+
+</div>`
 });
