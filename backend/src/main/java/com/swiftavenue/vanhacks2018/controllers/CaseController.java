@@ -26,10 +26,10 @@ public class CaseController {
     private XMNotificationService notificationService;
 
 
-    @Value("xmatters.notification.targetname:dwi2004@gmail.com")
+    @Value("${xmatters.notification.targetname:dwi2004@gmail.com}")
     private String notificationTargetName;
 
-    @Value("matters.notification.enabled:false")
+    @Value("${matters.notification.enabled:false}")
     private Boolean notificationEnabled;
 
     @RequestMapping(value = "/case", method = RequestMethod.POST)
