@@ -16,7 +16,8 @@ Vue.component('case-status', {
 });
 
 const Referrals = Vue.component('referral', {
-    template: `<table class="table referral-table table-striped table-hover">
+    template: `
+        <table class="table referral-table table-striped table-hover">
                  <thead>
                   <tr>
                    <th scope="col">#</th>

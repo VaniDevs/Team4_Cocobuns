@@ -38,3 +38,16 @@ textarea#appointment-message-text {
     font-size: 2rem;
     text-align: center;
 }
+
+.fade-enter-active {
+  transition: opacity .5s;
+}
+.fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, {
+  opacity: 0;
+}
+.fade-leave-to {
+  opacity: 0;
+}

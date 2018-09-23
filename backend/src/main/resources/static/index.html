@@ -60,7 +60,9 @@
         </div>
 
         <div class="container main-body">
-            <router-view></router-view>
+            <transition name="fade" mode="out-in">
+                <router-view></router-view>
+            </transition>
             <hr>
         </div>
 
@@ -86,6 +88,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
 
+
+<script type="text/babel" src="transition.js"></script>
 <script type="text/babel" src="global.js"></script>
 <script type="text/babel" src="agency.js"></script>
 <script type="text/babel" src="referral.js"></script>
@@ -94,14 +98,13 @@
 <script type="text/babel" src="help.js"></script>
 <script type="text/babel">
 
+
     const routes = [
       { path: '/', redirect: 'referrals' },
       { path: '/referrals', component: Referrals },
       { path: '/referral-create', component: ReferralCreate },
-      { path: '/referral-detail/:id', component: ReferralDetail },
-      { path: '/agencies', component: Agencies },
-      { path: '/agents', component: Agents },
-      { path: '/help', component: Help }
+      { path: '/referral-detail/:id', component: ReferralDetail},
+      { path: '/help', component: Help}
     ]
 
     const router = new VueRouter({

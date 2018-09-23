@@ -2,6 +2,7 @@
 const ReferralCreate = Vue.component('referral-create', {
     props: ['referral'],
     template: `
+    <transition-page>
     <form v-on:submit.prevent="onSubmit">
 
       <div class="form-row">
@@ -63,7 +64,7 @@ const ReferralCreate = Vue.component('referral-create', {
       <div class="clearfix">
        <button type="submit" class="btn btn-primary float-right">Submit Referral</button>
       </div>
-    </form>
+    </form></transition-page>
     `,
     data() {
       return {

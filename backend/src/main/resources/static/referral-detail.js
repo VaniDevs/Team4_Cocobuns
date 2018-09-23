@@ -91,8 +91,6 @@ const ReferralDetail = Vue.component('referral-detail', {
         </div>
 
     </form>
-
-
     `,
     data() {
       return {
