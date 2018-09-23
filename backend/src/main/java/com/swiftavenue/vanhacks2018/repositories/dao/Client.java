@@ -1,10 +1,10 @@
 package com.swiftavenue.vanhacks2018.repositories.dao;
 
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,8 +31,8 @@ public class Client {
     @Column(name = "baby_date_of_birth")
     private Date babyDateOfBirth;
 
-    @Enumerated(EnumType.STRING)
-    private Demographic demographic;
+    @ElementCollection
+    private Set<Sociographic> sociographics;
 
     @ManyToOne
     @JoinColumn(name = "referred_by_id")
@@ -74,12 +74,12 @@ public class Client {
         this.babyDateOfBirth = babyDateOfBirth;
     }
 
-    public Demographic getDemographic() {
-        return demographic;
+    public Set<Sociographic> getSociographics() {
+        return sociographics;
     }
 
-    public void setDemographic(Demographic demographic) {
-        this.demographic = demographic;
+    public void setSociographics(Set<Sociographic> sociographics) {
+        this.sociographics = sociographics;
     }
 
     public void setFirstName(String firstName) {
