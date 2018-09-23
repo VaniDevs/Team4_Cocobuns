@@ -10,7 +10,6 @@ public class UIMainController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("eventName", "Fun time");
         return "index.html";
     }
 

@@ -19,13 +19,13 @@ Vue.component('date-picker', {
 const ReferralCreate = Vue.component('referral-create', {
     props: ['referral'],
     template: `
-    <form>
+    <form v-on:submit.prevent="onSubmit">
 
       <div class="form-group">
         <label>Social-graphics</label>
         <div class="form-check" v-for="(option, index) in socialOptions">
               <input class="form-check-input" type="checkbox"
-                value="" v-bind:id="option.value" v-bind:value="option.value">
+                value="" v-bind:id="option.value" v-bind:value="option.value" v-model="selectedSocialGroups">
               <label class="form-check-label" v-bind:for="option.value">
                 {{ option.label }}
               </label>
@@ -64,7 +64,7 @@ const ReferralCreate = Vue.component('referral-create', {
 
       <div class="form-group">
         <label for="inputBabyDOB">Baby\'s Date of Birth</label>
-        <input type="text" class="form-control" id="inputBabyDOB" placeholder="yy/mm/dd">
+        <input type="text" class="form-control" id="inputBabyDOB" placeholder="yy/mm/dd" v-model="referralRequest.client.babyDateOfBirth">
       </div>
 
 
@@ -84,6 +84,8 @@ const ReferralCreate = Vue.component('referral-create', {
     `,
     data() {
       return {
+        selectedSocialGroups: [],
+        selectedRequestedGears: [],
         referralRequest: {
           caseStatus: 'new',
           client: {
@@ -95,7 +97,10 @@ const ReferralCreate = Vue.component('referral-create', {
             socialgraphics: ''
           },
           openedBy: {
-            id: currentAgentId
+            id: currentAgentId,
+            organization : {
+                id: currentOrgId
+            }
           }
         },
         socialOptions: [
@@ -135,5 +140,15 @@ const ReferralCreate = Vue.component('referral-create', {
             { label: "breast pump", value: "BREAST_PUMP" }
         ]
       }
+    },
+    methods: {
+        onSubmit() {
+            this.referralRequest.client.sociographics = this.selectedSocialGroups.join(',');
+            this.referralRequest.client.requestedGears = this.selectedRequestedGears.join(',');
+            axios.post(`${apiBaseUrl}/case`, this.referralRequest)
+              .then((response) => {
+                console.log(response.data);
+              });
+        }
     }
 });

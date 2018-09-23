@@ -28,6 +28,9 @@ repositories {
 	mavenCentral()
 }
 
+bootRun {
+	sourceResources sourceSets.main
+}
 
 ext {
 	springCloudVersion = 'Finchley.SR1'
