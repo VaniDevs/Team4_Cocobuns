@@ -30,6 +30,14 @@ div.jumbotron {
 
 }
 
+#notificationSentModal .modal-body {
+    font-size: 1.7rem;
+}
+
+.green-check-mark {
+    color: #32CD32;
+}
+
 #imageLogo {
   -webkit-transition: -webkit-transform .8s ease-in-out;
   transition: transform .8s ease-in-out;
