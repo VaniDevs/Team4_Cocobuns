@@ -2,6 +2,7 @@ package com.swiftavenue.vanhacks2018.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,27 +17,38 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class XMNotificationService {
-    // TODO-Dwi: externalize later
-    private static final String XMATTERS_URI = "https://cocobuns.xmatters.com/reapi/2015-04-01/forms/c4ef8900-7997-40a8-948d-4aefe90d8aab/triggers";
-    private static final String XM_USER = "team4cocobuns@gmail.com";
-    private static final String XM_PASSWORD = "coco#buns";
+    @Value("${xmatters.notification.uri}")
+    private String xmattersUri;
 
+    @Value("${xmatters.notification.username}")
+    private String xmUser;
 
-    public void sendNotification(XMNotificationProperties payload, String targetName) throws IOException, AuthenticationException {
+    @Value("${xmatters.notification.password}")
+    private String xmPassword;
+
+    /**
+     * Send new referral notification via xmatters
+     * @param payload
+     * @param targetNames
+     * @throws IOException
+     * @throws AuthenticationException
+     */
+    public void sendNotification(XMNotificationProperties payload, String targetNames) throws IOException, AuthenticationException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(XMATTERS_URI);
+        HttpPost httpPost = new HttpPost(xmattersUri);
 
-        String jsonPayload = jsonify(payload, targetName);
+        String jsonPayload = jsonify(payload, targetNames);
         StringEntity entity = new StringEntity(jsonPayload);
         httpPost.setEntity(entity);
         httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Content-type", "application/json");
 
-        UsernamePasswordCredentials creds = new UsernamePasswordCredentials(XM_USER, XM_PASSWORD);
+        UsernamePasswordCredentials creds = new UsernamePasswordCredentials(xmUser, xmPassword);
         httpPost.addHeader(new BasicScheme().authenticate(creds, httpPost, null));
 
         CloseableHttpResponse response = httpclient.execute(httpPost);
@@ -52,15 +64,16 @@ public class XMNotificationService {
         }
     }
 
-    public String jsonify(XMNotificationProperties properties, String targetName) throws JsonProcessingException {
+    public String jsonify(XMNotificationProperties properties, String targetNames) throws JsonProcessingException {
         XMPayload payload = new XMPayload();
         payload.setProperties(properties);
 
-        Recipient recip = new Recipient();
-        recip.setTargetName(targetName);
-
         List<Recipient> recipList = new ArrayList<>();
-        recipList.add(recip);
+        Arrays.stream(targetNames.split(",")).forEach(tn -> {
+            Recipient recip = new Recipient();
+            recip.setTargetName(tn);
+            recipList.add(recip);
+        });
         payload.setRecipients(recipList);
 
         ObjectMapper objectMapper = new ObjectMapper();
