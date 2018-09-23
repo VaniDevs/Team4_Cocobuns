@@ -40,6 +40,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-quartz')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile 'io.springfox:springfox-swagger2:2.9.2'
+	compile 'io.springfox:springfox-swagger-ui:2.9.2'
+	
 	// compile('org.springframework.cloud:spring-cloud-starter-aws')
 	// compile('org.springframework.cloud:spring-cloud-starter-aws-jdbc')
 	// compile('org.springframework.cloud:spring-cloud-starter-aws-messaging')
