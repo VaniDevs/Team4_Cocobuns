@@ -26,6 +26,8 @@ const ReferralCreate = Vue.component('referral-create', {
         <div class="form-check" v-for="(option, index) in socialOptions">
               <input class="form-check-input" type="checkbox"
                 value="" v-bind:id="option.value" v-bind:value="option.value" v-model="selectedSocialGroups">
+              <input class="form-check-input" type="checkbox"
+                value="" v-bind:id="option.value" v-bind:value="option.value" v-model="selectedRequestedGears">
               <label class="form-check-label" v-bind:for="option.value">
                 {{ option.label }}
               </label>
