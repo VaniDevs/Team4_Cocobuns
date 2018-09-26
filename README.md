@@ -1,15 +1,15 @@
 # Entry for Vanhack 2018 event - Team #4 Cocobun
 
-This project demonstrates one part of the automated workflow that BabyGoRound envisioned. 
+This project demonstrates one part of automated workflow that BabyGoRound envisioned. 
 
-# Build and Installation
+## Build and Installation
 
-## Prerequisites
+### Prerequisites
 
 * Java 9 or higher
 * Postgresql 10 or higher
 
-## Command-line Instructions
+### Command-line Instructions
 
 * Build
 ```bash
@@ -21,21 +21,21 @@ This project demonstrates one part of the automated workflow that BabyGoRound en
 ./gradlew bootRun
 ```
 
-# Technology
+## Technology
 
 * Spring Boot
-** Spring Fox for generating the swagger doc, served at -
-** xMatters integration
-** Twilio integration
+ * Spring Fox for generating the swagger doc, served at -
+ * xMatters integration
+ * Twilio integration
 * CD Pipeline hosted on AWS
-** Jenkin 
-** CodeBuild and CodeDeploy
-** Slack-bot integration
+ * Jenkin 
+ * CodeBuild and CodeDeploy
+ * Slack-bot integration
 * Vue.js 
 * Twitter Boostrap
 ** Material design
 
-# Consideration
+## Consideration
 
 We did not set up front-end asset pipeline in order to quickly iterate UI changes. Serveral libraries imported on run-time are designed for development, and should not be used in production.  
 
