@@ -23,17 +23,17 @@ This project demonstrates one part of automated workflow that BabyGoRound envisi
 
 ## Technology
 
-* Spring Boot
- * Spring Fox for generating the swagger doc, served at -
- * xMatters integration
- * Twilio integration
-* CD Pipeline hosted on AWS
- * Jenkin 
- * CodeBuild and CodeDeploy
- * Slack-bot integration
-* Vue.js 
-* Twitter Boostrap
-** Material design
+- Spring Boot
+  - Spring Fox for generating the swagger doc, served at -
+  - xMatters integration
+  - Twilio integration
+- CD Pipeline hosted on AWS
+  - Jenkin 
+  - CodeBuild and CodeDeploy
+  - Slack-bot integration
+- Vue.js 
+- Twitter Boostrap
+  - Material design
 
 ## Consideration
 
